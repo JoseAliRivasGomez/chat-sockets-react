@@ -1,16 +1,26 @@
+import { useContext, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import { ChatPage } from "../pages/ChatPage";
 import { AuthRouter } from "./AuthRouter";
 
 export const AppRouter = () => {
 
-    const status = 'not-authenticated-';
+    const {auth, verificarToken} = useContext(AuthContext);
+
+    useEffect(() => {
+      verificarToken();
+    }, [])
+
+    if (auth.checking){
+        return <></>
+    }
 
   return (
         <Routes>
 
             {
-                (status === 'not-authenticated')
+                (!auth.logged)
                 ? (
                 <>
                     <Route path="/*" element={<AuthRouter />} />

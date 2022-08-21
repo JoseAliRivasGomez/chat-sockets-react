@@ -14,11 +14,11 @@ const obtenerChat = async( req, res ) => {
     .sort({ createdAt: 'desc' })
     .limit(30);
 
-
+    const last30Reverse = last30.reverse();
 
     res.json({
         ok: true,
-        mensajes: last30
+        mensajes: last30Reverse
     });
 
 

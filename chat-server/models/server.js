@@ -30,6 +30,11 @@ class Server {
 
         this.app.use('/api/auth', require('../router/auth.router'));
         this.app.use('/api/mensajes', require('../router/mensajes.router') );
+
+        this.app.get('*', (req, res) => {
+            //console.log(__dirname.substring(0, __dirname.length-7));
+            res.sendFile( __dirname.substring(0, __dirname.length-7) + '/public/index.html'); //sin /src
+        })
     }
 
     configurarSockets(){
